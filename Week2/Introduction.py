@@ -19,6 +19,7 @@ Author: [Thinisha Nethan Nagendran]
 # These are used to explain individual lines of code
 # ^ You may delete these instructions ^
 
+#variables
 lecture_start_time = "11:00am"
 lecture_start_days = "Monday & Wednesday"
 
@@ -26,9 +27,8 @@ lab_start_time = "11:00am"
 lab_start_day = "Tuesday"
 
 
+#input & print
 user_name = str(input("What is your name? "))
-print(f'Welcome {user_name}, your lecture starts at {lecture_start_time} on {lecture_start_days} & \nlab starts at {lab_start_time} on {lab_start_day}')
+print(f'Hello {user_name}!\nWelcome to the CSCS/DSCI 1301 Principles of Computer/Data Science Course!\nOur class is held every {lecture_start_days} at {lecture_start_time}\nOur lab session is held every {lab_start_day} on {lab_start_time}')
 
 
-# Prints an informational message
-print('This file is to help you get started on your first programs!')
