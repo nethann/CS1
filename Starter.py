@@ -32,3 +32,5 @@ print(f'Welcome {user_name}, your lecture starts at {lecture_start_time} on {lec
 
 # Prints an informational message
 print('This file is to help you get started on your first programs!')
+
+#testing
