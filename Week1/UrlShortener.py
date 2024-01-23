@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import pyshorteners
+from urllib.parse import urlparse
 
 root = Tk()
 root.geometry('400x150')
@@ -11,19 +12,25 @@ root.resizable(FALSE, FALSE)
 frame = Frame(root)
 frame.pack()
 
-
 entry = ttk.Entry(frame)
 entry.grid(row=0, column=0, padx=0, pady=5)
 
 label = ttk.Label(frame, text='Nethan Nagendran Productions!')
 label.grid(row=1, column=0, pady=10)
 
+def is_valid_url(url):
+    try:
+        result = urlparse(url)
+        return all([result.scheme, result.netloc])
+    except ValueError:
+        return False
+
 def get_entry_value():
     # getting value from entry input
     value = entry.get()
 
-    if value.startswith("https://"):
-        # generating short URl
+    if is_valid_url(value):
+        # generating short URL
         long_url = value
         type_tiny = pyshorteners.Shortener()
         short_url = type_tiny.tinyurl.short(long_url)
@@ -35,10 +42,9 @@ def get_entry_value():
         root.clipboard_clear()
         root.clipboard_append(short_url)
 
-        label.config(text=f'{short_url}\Has been copied to your clipboard!')
-
+        label.config(text=f'{short_url}\nHas been copied to your clipboard!')
     else:
-        label.config(text="Please make sure you add a VALID http link!")
+        label.config(text="Please make sure you add a VALID URL!")
 
 generate_URL = ttk.Button(frame, text="Generate Short Url", command=get_entry_value)
 generate_URL.grid(row=2, column=0, pady=5)
