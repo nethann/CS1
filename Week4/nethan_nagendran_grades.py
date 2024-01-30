@@ -1,17 +1,17 @@
 exam_grades = []
-# exam_tracker = 0
+exam_tracker = 0
 
-# grades_input = input("Enter the exam grades separated by commas: ")
-# grades_list = grades_input.split(",")
+grades_input = input("Enter the exam grades separated by commas: ")
+grades_list = grades_input.split(",")
 
-# for grade in grades_list:
-#     exam_grades.append(int(grade))
-#     exam_tracker += 1
+for grade in grades_list:
+    exam_grades.append(int(grade))
+    exam_tracker += 1
 
-# print(f'{attendance_list} took the exam')
-# print(f'The highest grade was a {max(exam_grades)}')
-# print(f'The lowest grade was a {min(exam_grades)}')
-# print(f'The lowest grade was a {sum(exam_grades)/exam_tracker}')
+print(f'{exam_tracker} students took the exam')
+print(f'The highest grade was a {max(exam_grades)}')
+print(f'The lowest grade was a {min(exam_grades)}')
+print(f'The lowest grade was a {sum(exam_grades)/exam_tracker}')
 
 
 day_1_set = set()
@@ -30,8 +30,8 @@ for student in day_2_attendance.split(", "):
 print(day_1_set)
 
 # Check for duplicates (students who attended both days)
-duplicates = day_1_set.intersection(day_2_set)
-if duplicates:
-    print("Duplicate students who attended both days:", duplicates)
-else:
-    print("No duplicates, all students are unique across both days")
+attended_both_days = day_1_set.intersection(day_2_set)
+attended_one_day = day_1_set.symmetric_difference(day_2_set)
+
+print("Students who attended both days:", attended_both_days)
+print("Students who attended only one day:", attended_one_day)
