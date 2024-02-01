@@ -6,7 +6,7 @@ menu_item = {
 }
 
 
-hot_dogs_input = int(input("Please enter the number of Hot Dogs: "))
+hot_dogs_input = int(input("Please enter the numb of Hot Dogs: "))
 pizza_slices_input = int(input("Please enter the number of Pizza Slices: "))
 whole_pizza_input = int(input("Please enter the number of Whole Pizzas: "))
 soft_drink_input = int(input("Please enter the number of Soft Drinks: "))
