@@ -44,4 +44,4 @@ class myOwnClass():
 
 
 Person = myOwnClass({1,2,3})
-print(Person.ad(50))
+print(Person.rm())

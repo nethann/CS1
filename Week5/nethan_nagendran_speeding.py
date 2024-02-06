@@ -3,7 +3,6 @@ speed_limit_input = int(input("Pleasze enter the speed limit for the road: "))
 vehicle_recorded_speed = int(input("Please enter the vehicle's recorded speed: "))
 
 difference_of_speed = vehicle_recorded_speed - speed_limit_input
-print(difference_of_speed)
 
 
 if difference_of_speed <= -10:
