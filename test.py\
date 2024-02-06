@@ -1,0 +1,41 @@
+# class Solution(object):
+#     def twoSum(self, nums, target):
+#         self.nums = nums 
+#         self.target = target
+
+#         print(self.nums, self.target)
+
+#         for elements in self.nums:
+#             print(elements)
+
+#             if elements == self.target: 
+#                 print("already contains") 
+
+            
+            
+
+
+
+
+# person = Solution()
+# person.twoSum([5,15,20],5)
+
+
+class myOwnClass():
+    def __init__(self,values):
+        self.values = values
+
+        print(type(self.values))
+
+        if type(self.values) == f'': 
+            print('this is a list')
+
+        else: 
+            print('not a list')
+
+    # def rm(self,indexOf): 
+    #     self.values.pop(indexOf)
+    #     return self.values
+
+Person = myOwnClass([1,2,34])
+# Person.rm(1)
