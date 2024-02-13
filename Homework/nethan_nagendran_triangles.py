@@ -1,6 +1,5 @@
 #Thinisha Nethan Nagendran
-
-
+#This program determines takes the inputs of the sides, uses side parameters, heron formula and finds the area and uses pythagorean theoream to determine the type of an angle
 import math 
 
 #fetching the user inputs
