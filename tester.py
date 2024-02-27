@@ -12,7 +12,7 @@ class Solution(object):
             digits = [int(digit) for digit in str(self.n)]        
 
             for i in digits: 
-                print(i)
+                print(i**2)
 
                 
 d1 = Solution()
