@@ -1,16 +1,16 @@
 def text_filter(message):
 
     banned_words = ["Turkey", "Dog", "Fox", "Cat", "Chicken"]
-    words = message.split()  
+    word_split = message.split()  
 
     filtered_words = []
-    for word in words:
+    for word in word_split:
         if word not in banned_words:
             filtered_words.append(word)
 
-    new_message = " ".join(filtered_words)
+    join_message = " ".join(filtered_words)
 
-    return new_message
+    return join_message
 
 
 message_input = input("Enter your message: ")
