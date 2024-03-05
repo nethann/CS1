@@ -1,38 +1,4 @@
-# """
-# Program Description: This program takes a given DNA sequence translates it to a protein sequence.
 
-# Author:
-# """
-
-# import helper
-
-# def transcription(dna_sequence):
-#     complement = ''
-
-#     # Create the Base Pair Complement
-
-#     # Replace Thymine with Uracil
-
-#     return mrna
-
-# def translate(mrna):
-#     protein = ''
-
-#     # Split mrna into nucleotide triplets
-
-#     # Replace Triplets with Amino Acids
-
-#     return protein
-
-
-# dna = 'TACGCAGAAAAAAATCAGCGGGGTTGTTGGTCATTAGTCTGAATT'
-
-
-
-
-# Dictionary for Nucleotide to Amino Acid conversion
-# This is a simplified version; you should use the full dictionary provided in the helper.py file
-# Amino acids dictionary as provided
 amino_acids_dict = {
     'UUU': 'Phe',
     'UUC': 'Phe',
@@ -158,6 +124,6 @@ mrna_sequence = transcription(dna_sequence)
 
 protein_sequence = translation(mrna_sequence)
 
-print(dna_sequence)
-print(mrna_sequence)
+print(f'DNA Sequence {dna_sequence}')
+print(f'mRNA Sequence {mrna_sequence}')
 print(protein_sequence)

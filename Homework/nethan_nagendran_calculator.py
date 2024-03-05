@@ -38,13 +38,13 @@ while True:
         print("Error: Invalid input format")
         continue
 
-    try:
-        left = float(expression[0])
-        operator = expression[1]
-        right = float(expression[2])
-    except ValueError:
-        print("Error: Invalid input format")
-        continue
+    
+    left = float(expression[0])
+    operator = expression[1]
+    right = float(expression[2])
+    # except ValueError:
+    #     print("Error: Invalid input format")
+    #     continue
 
     if operator == "+": 
         print(addition(left, right))
