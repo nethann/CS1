@@ -31,11 +31,11 @@ while True:
     calculator_input = input(":> ")
     expression = calculator_input.split()
 
-    if calculator_input.lower() == 'quit': 
+    if calculator_input.lower() == 'quit' or calculator_input.lower() == 'q': 
         break
 
     if len(expression) != 3:
-        print("Error: Invalid input format")
+        print(f"Error: Invalid Expression - ({calculator_input}) ")
         continue
 
     
@@ -45,18 +45,21 @@ while True:
 
 
     if operator == "+": 
-        print(addition(left, right))
+        print("Result: ",addition(left, right))
     elif operator == "-": 
-        print(subtraction(left, right))
+        print("Result: ",subtraction(left, right))
     elif operator == "*":
-        print(multiplication(left, right))
+        print("Result: ",multiplication(left, right))
     elif operator == "/":
-        print(division(left, right))
+        print("Result: ",division(left, right))
     elif operator == "%":
-        print(modulus(left, right))
+        print("Result: ",modulus(left, right))
     elif operator == "**":
-        print(power(left, right))
+        print("Result: ",power(left, right))
     elif operator == "//":
-        print(floor_division(left, right))
+        print("Result: ",floor_division(left, right))
     else:
         print("Error: Invalid operator")
+
+
+
