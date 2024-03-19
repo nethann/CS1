@@ -14,4 +14,3 @@ updated_grades = manage_student_grades(updated_grades, Charlie=None)
 print(updated_grades)
 
 
-# {'Alice': 85, 'bob': 80, 'David': 78, 'Emily': 93}
