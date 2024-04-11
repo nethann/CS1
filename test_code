@@ -20,71 +20,58 @@ class Number:
             raise ValueError("Division by zero is not allowed")
         return Number(self.num // other.num)
 
-import re
+def parse_expression(expression):
+    def get_number(index):
+        number = 0
+        while index < len(expression) and expression[index].isdigit():
+            number = number * 10 + int(expression[index])
+            index += 1
+        return Number(number), index
 
-def evaluate_expression(expression):
-    def parse(expr):
-        # This regular expression finds numbers and operators including parentheses
-        tokens = re.findall(r'\d+|\+|\-|\*|\/|\(|\)', expr)
-        return tokens
+    def parse(index=0, min_op_priority=1):
+        operations = {'+': 1, '-': 1, '*': 2, '/': 2}
+        current_op_priority = {'+': 1, '-': 1, '*': 2, '/': 2}
+        num_operators = {1: Number.__add__, 2: Number.__sub__, 3: Number.__mul__, 4: Number.__truediv__}
+        
+        if index < len(expression) and expression[index] == '(':
+            num, index = parse(index + 1, 1)
+            index += 1  # skip the closing ')'
 
-    def eval_tokens(tokens):
-        # Handle the operations based on precedence and associative laws
-        def apply_op(op, left, right):
-            if op == '+': return left + right
-            if op == '-': return left - right
-            if op == '*': return left * right
-            if op == '/': return left / right
-            raise ValueError(f"Unsupported operator {op}")
+        else:
+            num, index = get_number(index)
 
-        # Helper function to process basic expressions without parentheses
-        def basic_eval(tokens):
-            values = []
-            ops = []
-            i = 0
+        result = num
 
-            while i < len(tokens):
-                token = tokens[i]
-                if token.isdigit():
-                    values.append(Number(int(token)))
-                elif token in ('+', '-', '*', '/'):
-                    while (ops and ops[-1] != '(' and
-                           (ops[-1] in ('*', '/') or token in ('+', '-'))):
-                        op = ops.pop()
-                        right = values.pop()
-                        left = values.pop()
-                        values.append(apply_op(op, left, right))
-                    ops.append(token)
-                elif token == '(':
-                    ops.append(token)
-                elif token == ')':
-                    while ops[-1] != '(':
-                        op = ops.pop()
-                        right = values.pop()
-                        left = values.pop()
-                        values.append(apply_op(op, left, right))
-                    ops.pop()  # Pop '('
-                i += 1
+        while index < len(expression) and expression[index] in operations:
+            op = expression[index]
+            op_priority = operations[op]
+            if op_priority < min_op_priority:
+                break
 
-            # Final reduction of the expression
-            while ops:
-                op = ops.pop()
-                right = values.pop()
-                left = values.pop()
-                values.append(apply_op(op, left, right))
-            
-            return values[0]
+            index += 1  # move past the operator
+            if op in ('+', '-'):
+                num, index = parse(index, op_priority + 1)
+            else:
+                num, index = parse(index, op_priority)
 
-        # Return the evaluated result
-        return basic_eval(tokens)
+            if op == '+':
+                result = result + num
+            elif op == '-':
+                result = result - num
+            elif op == '*':
+                result = result * num
+            elif op == '/':
+                result = result / num
 
-    token_list = parse(expression)
-    return eval_tokens(token_list)
+        return result, index
+
+    result, _ = parse()
+    return result
 
 if __name__ == "__main__":
     try:
         expression = input("Enter a complex expression (e.g., '(30 + 20 * 5) / 125'): ")
-        result = evaluate_expression(expression)
+        result = parse_expression(expression.replace(' ', ''))
         print(f"Result: {result}")
     except Exception as e:
         print(f"Error: {e}")
