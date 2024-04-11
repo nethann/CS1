@@ -1,0 +1,90 @@
+
+class Number:
+    def __init__(self, num):
+        self.num = num
+
+    def __str__(self):
+        return str(self.num)
+
+    def __add__(self, other):
+        return Number(self.num + other.num)
+
+    def __sub__(self, other):
+        return Number(self.num - other.num)
+
+    def __mul__(self, other):
+        return Number(self.num * other.num)
+
+    def __truediv__(self, other):
+        if other.num == 0:
+            raise ValueError("Division by zero is not allowed")
+        return Number(self.num // other.num)
+
+import re
+
+def evaluate_expression(expression):
+    def parse(expr):
+        # This regular expression finds numbers and operators including parentheses
+        tokens = re.findall(r'\d+|\+|\-|\*|\/|\(|\)', expr)
+        return tokens
+
+    def eval_tokens(tokens):
+        # Handle the operations based on precedence and associative laws
+        def apply_op(op, left, right):
+            if op == '+': return left + right
+            if op == '-': return left - right
+            if op == '*': return left * right
+            if op == '/': return left / right
+            raise ValueError(f"Unsupported operator {op}")
+
+        # Helper function to process basic expressions without parentheses
+        def basic_eval(tokens):
+            values = []
+            ops = []
+            i = 0
+
+            while i < len(tokens):
+                token = tokens[i]
+                if token.isdigit():
+                    values.append(Number(int(token)))
+                elif token in ('+', '-', '*', '/'):
+                    while (ops and ops[-1] != '(' and
+                           (ops[-1] in ('*', '/') or token in ('+', '-'))):
+                        op = ops.pop()
+                        right = values.pop()
+                        left = values.pop()
+                        values.append(apply_op(op, left, right))
+                    ops.append(token)
+                elif token == '(':
+                    ops.append(token)
+                elif token == ')':
+                    while ops[-1] != '(':
+                        op = ops.pop()
+                        right = values.pop()
+                        left = values.pop()
+                        values.append(apply_op(op, left, right))
+                    ops.pop()  # Pop '('
+                i += 1
+
+            # Final reduction of the expression
+            while ops:
+                op = ops.pop()
+                right = values.pop()
+                left = values.pop()
+                values.append(apply_op(op, left, right))
+            
+            return values[0]
+
+        # Return the evaluated result
+        return basic_eval(tokens)
+
+    token_list = parse(expression)
+    return eval_tokens(token_list)
+
+if __name__ == "__main__":
+    try:
+        expression = input("Enter a complex expression (e.g., '(30 + 20 * 5) / 125'): ")
+        result = evaluate_expression(expression)
+        print(f"Result: {result}")
+    except Exception as e:
+        print(f"Error: {e}")
