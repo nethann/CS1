@@ -1,52 +1,39 @@
 class Number:
-  def __init__(self, num):
-      self.num = num
+    def __init__(self, num):
+        self.num = num
 
-  def __str__(self):
-      return str(self.num)
+    def __str__(self):
+        return str(self.num)
 
-  def __add__(self, other):
-      return Number(self.num + other.num)
+    def __add__(self, other):
+        return Number(self.num + other.num)
 
-  def __sub__(self, other):
-      return Number(self.num - other.num)
+    def __sub__(self, other):
+        return Number(self.num - other.num)
 
-  def __mul__(self, other):
-      return Number(self.num * other.num)
+    def __mul__(self, other):
+        return Number(self.num * other.num)
 
-  def __truediv__(self, other):
-      return Number(self.num // other.num)  
+    def __truediv__(self, other):
+        return Number(self.num // other.num)
 
-def evaluate_expression(expression):
-  try:
-      while '(' in expression:
-          start_index = expression.rfind('(')
-          end_index = start_index + expression[start_index:].find(')')
-          sub_expression = expression[start_index + 1:end_index]
-          result = evaluate_expression(sub_expression)
-          expression = expression[:start_index] + str(result) + expression[end_index + 1:]
+num1 = int(input("Enter first number: "))
+num2 = int(input("Enter second number: "))
 
-      parts = expression.split()
-      num1 = Number(int(parts[0]))
-      for i in range(1, len(parts), 2):
-          operator = parts[i]
-          num2 = int(parts[i + 1])
+a = Number(num1)
+b = Number(num2)
 
-          if operator == '+':
-              num1 = num1 + Number(num2)
-          elif operator == '-':
-              num1 = num1 - Number(num2)
-          elif operator == '*':
-              num1 = num1 * Number(num2)
-          elif operator == '/':
-              num1 = num1 / Number(num2)
-          else:
-              return "Invalid operator. Please use +, -, *, or /."
+add_result = a + b
+print(f"{a} + {b} = {add_result}")
 
-      return num1
-  except ValueError:
-      return "Invalid input. Please enter a valid expression (e.g., 30 + 40)."
+sub_result = a - b
+print(f"{a} - {b} = {sub_result}")
 
-user_expression = input("Enter an arithmetic expression: ")
-result = evaluate_expression(user_expression)
-print(f"Result: {result}")
+mul_result = a * b
+print(f"{a} * {b} = {mul_result}")
+
+div_result = a / b
+print(f"{a} / {b} = {div_result}")
+
+final_result = (add_result + (sub_result * div_result)) / mul_result
+print(f"({add_result} + {sub_result} * {div_result}) / {mul_result} = {final_result}")
